@@ -1,0 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  background-color: #f5f8fa;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd9e2;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #9aafbd;
+}
+
+/* Print-like clinical look */
+.clinical-shadow {
+  box-shadow: 0 1px 2px rgba(25, 55, 75, 0.06), 0 1px 4px rgba(25, 55, 75, 0.04);
+}
+.clinical-shadow-lg {
+  box-shadow: 0 12px 24px -8px rgba(25, 55, 75, 0.16), 0 4px 10px -4px rgba(25, 55, 75, 0.08);
+}
+
+/* Impression : seule la feuille de prévisualisation est imprimée */
+@media print {
+  @page {
+    size: A4;
+    margin: 12mm;
+  }
+  body.printing * {
+    visibility: hidden;
+  }
+  body.printing .print-sheet,
+  body.printing .print-sheet * {
+    visibility: visible;
+  }
+  body.printing .print-sheet {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 0 !important;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+  }
+  body.printing .no-print {
+    display: none !important;
+  }
+  body.printing .print-sheet thead {
+    display: table-header-group;
+  }
+  body.printing .print-sheet tr {
+    page-break-inside: avoid;
+  }
+}
+
